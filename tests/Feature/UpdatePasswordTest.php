@@ -15,7 +15,7 @@ class UpdatePasswordTest extends TestCase
     {
         $this->actingAs($user = User::factory()->create());
 
-        $this->put('/user/password', [
+        $response = $this->put('/user/password', [
             'current_password' => 'password',
             'password' => 'new-password',
             'password_confirmation' => 'new-password',
