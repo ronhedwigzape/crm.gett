@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Status;
 use App\Models\Transaction;
 use App\Models\Client;
 use App\Models\Service;
@@ -24,11 +25,10 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'client_id'        => Client::factory(),
-            'service_id'       => Service::factory(),
+            'client_id'        => Client::inRandomOrder()->first()->id,
+            'service_id'       => Service::inRandomOrder()->first()->id,
+            'status_id'        => Status::inRandomOrder()->first()->id,
             'transaction_date' => $this->faker->dateTimeBetween('-1 month', 'now'),
-            'amount'           => $this->faker->randomFloat(2, 100, 10000),
-            'user_id'          => User::factory(),
         ];
     }
 }

@@ -16,6 +16,6 @@ class TourPackagesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        TourPackage::factory(30)->create();
+        TourPackage::factory(20)->create();
     }
 }

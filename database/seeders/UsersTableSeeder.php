@@ -14,11 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $branches = Branch::all();
-
-        User::factory(20)->make()->each(function ($user) use ($branches) {
-            $user->branch_id = $branches->random()->id;
-            $user->save();
-        });
+        User::factory(10)->create();
     }
 }

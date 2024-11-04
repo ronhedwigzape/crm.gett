@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             BranchesTableSeeder::class,
+            UsersTableSeeder::class,
             ClientsTableSeeder::class,
             ServicesTableSeeder::class,
             StatusTableSeeder::class,
-            UsersTableSeeder::class,
             AirlinesTableSeeder::class,
             TourPackagesTableSeeder::class,
             TransactionsTableSeeder::class,

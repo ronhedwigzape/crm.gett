@@ -65,8 +65,8 @@ class User extends Authenticatable
         return $this->belongsTo(Branch::class);
     }
 
-    public function transactions()
+    public function clients()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Client::class);
     }
 }

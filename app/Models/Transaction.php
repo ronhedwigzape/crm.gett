@@ -10,8 +10,7 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 'service_id', 'transaction_date',
-        'amount', 'user_id'
+        'client_id', 'service_id', 'status_id', 'transaction_date',
     ];
 
     public function client()
@@ -27,5 +26,10 @@ class Transaction extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

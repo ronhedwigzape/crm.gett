@@ -10,8 +10,8 @@ class TourPackage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 'service_id', 'status_id',
-        'package_name', 'start_date', 'end_date'
+        'service_id', 'package_name', 'destination',
+        'amount', 'itinerary', 'start_date', 'end_date',
     ];
 
     public function client()

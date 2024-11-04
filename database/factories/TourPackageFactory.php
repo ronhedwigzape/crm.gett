@@ -23,16 +23,14 @@ class TourPackageFactory extends Factory
      */
     public function definition(): array
     {
-        $startDate = $this->faker->dateTimeBetween('+1 days', '+1 month');
-        $endDate = (clone $startDate)->modify('+'. rand(3, 10) .' days');
-
         return [
-            'client_id'     => Client::inRandomOrder()->first()->id,
-            'service_id'    => Service::where('name', 'Tour Package')->first()->id,
-            'status_id'     => Status::inRandomOrder()->first()->id,
-            'package_name'  => $this->faker->sentence(3),
-            'start_date'    => $startDate,
-            'end_date'      => $endDate,
+            'service_id'   => Service::where('name', 'Tour Package')->first()->id,
+            'package_name' => $this->faker->sentence(3),
+            'destination'  => $this->faker->city,
+            'amount'       => $this->faker->randomFloat(2, 500, 10000),
+            'itinerary'    => $this->faker->paragraph(),
+            'start_date'   => $this->faker->dateTimeBetween('+1 week', '+2 weeks'),
+            'end_date'     => $this->faker->dateTimeBetween('+2 weeks', '+1 month'),
         ];
     }
 }

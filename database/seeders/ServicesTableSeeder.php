@@ -13,7 +13,13 @@ class ServicesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $services = ['Flight Ticket', 'Tour Package'];
+        $services = [
+            'Flight Ticket',
+            'Tour Package',
+            'Hotel Booking',
+            'Travel Insurance',
+            'Transport Services',
+        ];
 
         foreach ($services as $serviceName) {
             Service::create([

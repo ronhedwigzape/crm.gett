@@ -28,13 +28,15 @@ class FlightTicketFactory extends Factory
         $arrivalDate = (clone $departureDate)->modify('+'. rand(1, 12) .' hours');
 
         return [
-            'client_id'       => Client::inRandomOrder()->first()->id,
-            'service_id'      => Service::where('name', 'Flight Ticket')->first()->id,
-            'status_id'       => Status::inRandomOrder()->first()->id, // Use existing status
-            'airline_id'      => Airline::inRandomOrder()->first()->id,
-            'flight_number'   => strtoupper($this->faker->bothify('??###')),
-            'departure_date'  => $departureDate,
-            'arrival_date'    => $arrivalDate,
+            'service_id'        => Service::where('name', 'Flight Ticket')->first()->id,
+            'airline_id'        => Airline::inRandomOrder()->first()->id,
+            'flight_number'     => strtoupper($this->faker->bothify('??###')),
+            'departure_airport' => $this->faker->city,
+            'arrival_airport'   => $this->faker->city,
+            'departure_date'    => $departureDate,
+            'amount'            => $this->faker->randomFloat(2, 100, 10000),
+            'arrival_date'      => $arrivalDate,
+            'seat_class'        => $this->faker->randomElement(['Economy', 'Business', 'First Class']),
         ];
     }
 }

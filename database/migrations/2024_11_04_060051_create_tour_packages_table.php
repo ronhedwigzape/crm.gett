@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('tour_packages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
             $table->string('package_name');
+            $table->string('destination');
+            $table->decimal('amount', 10, 2);
+            $table->string('itinerary');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();

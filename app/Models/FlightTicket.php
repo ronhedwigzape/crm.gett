@@ -10,23 +10,14 @@ class FlightTicket extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 'service_id', 'status_id', 'airline_id',
-        'flight_number', 'departure_date', 'arrival_date'
+        'service_id', 'airline_id', 'flight_number',
+        'departure_airport', 'arrival_airport', 'departure_date',
+        'amount', 'arrival_date', 'seat_class',
     ];
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
 
     public function service()
     {
         return $this->belongsTo(Service::class);
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
     }
 
     public function airline()
