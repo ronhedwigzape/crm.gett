@@ -28,12 +28,14 @@ class UserController extends Controller
             'username'      => 'required|string|max:255|unique:users',
             'password_hash' => 'required|string|min:6',
             'branch_id'     => 'required|exists:branches,id',
+            'role'          => 'required|string|in:admin,agent',
         ]);
 
         $user = User::create([
             'username'      => $validated['username'],
             'password_hash' => Hash::make($validated['password_hash']),
             'branch_id'     => $validated['branch_id'],
+            'role'          => $validated['role'],
         ]);
 
         return response()->json($user, 201);
@@ -58,10 +60,12 @@ class UserController extends Controller
             'username'      => 'required|string|max:255|unique:users,username,' . $user->id,
             'password_hash' => 'nullable|string|min:6',
             'branch_id'     => 'required|exists:branches,id',
+            'role'       => 'required|string|in:admin,agent',
         ]);
 
         $user->username = $validated['username'];
         $user->branch_id = $validated['branch_id'];
+        $user->role = $validated['role'];
 
         if (!empty($validated['password_hash'])) {
             $user->password_hash = Hash::make($validated['password_hash']);

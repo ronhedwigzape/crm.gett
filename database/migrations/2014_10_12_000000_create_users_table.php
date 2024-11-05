@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
+            $table->string('role')->default('agent');
             $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
