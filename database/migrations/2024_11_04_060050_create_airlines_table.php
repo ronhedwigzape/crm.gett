@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('airlines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
+            $table->year('founded')->nullable();
+            $table->string('hubs')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

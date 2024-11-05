@@ -25,10 +25,11 @@ class DatabaseSeeder extends Seeder
             ClientsTableSeeder::class,
             ServicesTableSeeder::class,
             StatusTableSeeder::class,
-            AirlinesTableSeeder::class,
             TourPackagesTableSeeder::class,
             TransactionsTableSeeder::class,
+            AirlinesTableSeeder::class,
             FlightTicketsTableSeeder::class,
+
         ]);
     }
 }

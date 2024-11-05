@@ -9,7 +9,7 @@ class Airline extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'code'];
+    protected $fillable = ['name', 'code', 'founded', 'hubs', 'notes'];
 
     public function flightTickets()
     {
