@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Airline;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AirlinesTableSeeder extends Seeder
@@ -65,28 +64,28 @@ class AirlinesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Air Link International Airways',
-                'code' => null,
+                'code' => 'AL',
                 'founded' => 1983,
                 'hubs' => 'Manila',
                 'notes' => 'Charter airline.',
             ],
             [
                 'name' => 'SEAir International',
-                'code' => null,
+                'code' => 'SI',
                 'founded' => 2012,
                 'hubs' => 'Clark, Manila',
                 'notes' => 'Operates as a charter and cargo airline.',
             ],
             [
                 'name' => 'MET Express Air Corp.',
-                'code' => null,
+                'code' => 'ME',
                 'founded' => 2021,
                 'hubs' => 'Clark',
                 'notes' => 'Cargo airline.',
             ],
             [
                 'name' => 'PSI Air 2007',
-                'code' => null,
+                'code' => 'PA',
                 'founded' => 2016,
                 'hubs' => 'Clark',
                 'notes' => 'Cargo airline.',
@@ -94,7 +93,15 @@ class AirlinesTableSeeder extends Seeder
         ];
 
         foreach ($airlines as $airline) {
-            Airline::firstOrCreate(['name' => $airline['name']], $airline);
+            Airline::updateOrCreate(
+                ['name' => $airline['name']],
+                [
+                    'code' => $airline['code'],
+                    'founded' => $airline['founded'],
+                    'hubs' => $airline['hubs'],
+                    'notes' => $airline['notes'],
+                ]
+            );
         }
     }
 }
