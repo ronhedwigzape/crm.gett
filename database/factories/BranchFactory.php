@@ -5,9 +5,6 @@ namespace Database\Factories;
 use App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Branch>
- */
 class BranchFactory extends Factory
 {
     protected $model = Branch::class;
@@ -19,9 +16,20 @@ class BranchFactory extends Factory
      */
     public function definition(): array
     {
+        // Define a list of branches with their locations
+        $branches = [
+            ['name' => 'SM Manila Branch', 'location' => 'Manila, Philippines'],
+            ['name' => 'SM Legaspi Branch', 'location' => 'Legaspi, Philippines'],
+            ['name' => 'SM Daet Branch', 'location' => 'Daet, Philippines'],
+            ['name' => 'Naga Branch', 'location' => 'Naga, Philippines'],
+        ];
+
+        // Use randomElement to select a branch
+        $branch = $this->faker->unique()->randomElement($branches);
+
         return [
-            'name'     => $this->faker->company,
-            'location' => $this->faker->address,
+            'name'     => $branch['name'],
+            'location' => $branch['location'],
         ];
     }
 }

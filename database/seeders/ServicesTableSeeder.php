@@ -18,6 +18,7 @@ class ServicesTableSeeder extends Seeder
             'Tour Package',
             'Hotel Booking',
             'Travel Insurance',
+            'Tourist Visa',
             'Transport Services',
         ];
 
