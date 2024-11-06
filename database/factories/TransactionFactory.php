@@ -25,6 +25,7 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
+            'code'             => $this->faker->uuid(),
             'client_id'        => Client::inRandomOrder()->first()->id,
             'service_id'       => Service::inRandomOrder()->first()->id,
             'status_id'        => Status::inRandomOrder()->first()->id,
