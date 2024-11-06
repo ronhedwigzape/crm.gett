@@ -9,6 +9,7 @@ import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 import 'primeicons/primeicons.css';
 import {autoAnimatePlugin} from "@formkit/auto-animate/vue";
+import ToastService from 'primevue/toastservice';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -27,6 +28,7 @@ createInertiaApp({
                     }
                 }
             })
+            .use(ToastService)
             .use(autoAnimatePlugin)
             .use(ZiggyVue)
             .mount(el);
