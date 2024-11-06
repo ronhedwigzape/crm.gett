@@ -260,6 +260,8 @@ watch(
     { deep: true }
 );
 
+
+
 const toast = useToast();
 const dt = ref();
 const transactions = ref();
@@ -278,6 +280,13 @@ const statuses = ref([
     {label: 'Cancelled', value: 'Cancelled'}
 ]);
 
+watch(
+    () => filters.value,
+    (newFilters, oldFilters) => {
+        console.log(newFilters.global.value.value)
+    },
+    { deep: true }
+)
 const handleClientName = (client) => {
     return `${client.first_name} ${client.last_name}`
 }

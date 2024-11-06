@@ -25,6 +25,7 @@ class TourPackageFactory extends Factory
     {
         return [
             'service_id'   => Service::where('name', 'Tour Package')->first()->id,
+            'client_id'    => Client::factory()->create()->id,
             'package_name' => $this->faker->sentence(3),
             'destination'  => $this->faker->city,
             'amount'       => $this->faker->randomFloat(2, 500, 10000),

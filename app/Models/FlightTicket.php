@@ -10,7 +10,7 @@ class FlightTicket extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service_id', 'airline_id', 'flight_number',
+        'service_id', 'client_id', 'airline_id', 'flight_number',
         'departure_airport', 'arrival_airport', 'departure_date',
         'amount', 'arrival_date', 'seat_class',
     ];
