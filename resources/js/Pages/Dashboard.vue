@@ -15,22 +15,22 @@
                                 <DataTable :value="new Array(15)">
                                     <Column field="code" header="#">
                                         <template #body>
-                                            <Skeleton></Skeleton>
+                                            <Skeleton/>
                                         </template>
                                     </Column>
-                                    <Column field="name" header="Name">
+                                    <Column field="client" header="Client">
                                         <template #body>
-                                            <Skeleton></Skeleton>
+                                            <Skeleton/>
                                         </template>
                                     </Column>
-                                    <Column field="category" header="Category">
+                                    <Column field="service" header="Service">
                                         <template #body>
-                                            <Skeleton></Skeleton>
+                                            <Skeleton/>
                                         </template>
                                     </Column>
                                     <Column field="quantity" header="Quantity">
                                         <template #body>
-                                            <Skeleton></Skeleton>
+                                            <Skeleton/>
                                         </template>
                                     </Column>
                                 </DataTable>
@@ -41,23 +41,26 @@
                             <div class="card">
                                 <Toolbar class="mb-6">
                                     <template #start>
-                                        <Button label="New" icon="pi pi-plus" class="mr-2" @click="openNew" />
-                                        <Button label="Delete" icon="pi pi-trash" severity="danger" outlined @click="confirmDeleteSelected" :disabled="!selectedProducts || !selectedProducts.length" />
+                                        <Button label="New" icon="pi pi-plus" class="mr-2" @click="openNew"/>
+                                        <Button label="Delete" icon="pi pi-trash" severity="danger" outlined @click="confirmDeleteSelected" :disabled="!selectedTransactions || !selectedTransactions.length" />
                                     </template>
 
                                     <template #end>
                                         <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" customUpload chooseLabel="Import" class="mr-2" auto :chooseButtonProps="{ severity: 'secondary' }" />
-                                        <Button label="Export" icon="pi pi-upload" severity="secondary" @click="exportCSV" />
+                                        <Button label="Export" icon="pi pi-upload" severity="secondary" @click="exportCSV"/>
                                     </template>
                                 </Toolbar>
 
                                 <DataTable
                                     ref="dt"
-                                    v-model:selection="selectedProducts"
+                                    v-model:selection="selectedTransactions"
                                     :value="transactions"
                                     dataKey="id"
                                     :paginator="true"
+                                    :alwaysShowPaginator="true"
                                     :rows="10"
+                                    :lazy="true"
+                                    :rowHover="true"
                                     :filters="filters"
                                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                                     :rowsPerPageOptions="[5, 10, 25]"
@@ -65,7 +68,7 @@
                                 >
                                     <template #header>
                                         <div class="flex flex-wrap gap-2 items-center justify-between">
-                                            <h4 class="m-0">Manage Transactions</h4>
+                                            <h4 class="m-0 ">Manage Transactions</h4>
                                             <IconField>
                                                 <InputIcon>
                                                     <i class="pi pi-search" />
@@ -80,12 +83,12 @@
                                     <Column field="name" header="Name" sortable style="min-width: 16rem"></Column>
                                     <Column header="Image">
                                         <template #body="slotProps">
-                                            <img :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`" :alt="slotProps.data.image" class="rounded" style="width: 64px" />
+                                            <img :src="`https://primefaces.org/cdn/primevue/images/transaction/${slotProps.data.image}`" :alt="slotProps.data.image" class="rounded" style="width: 64px" />
                                         </template>
                                     </Column>
                                     <Column field="price" header="Price" sortable style="min-width: 8rem">
                                         <template #body="slotProps">
-                                            {{ formatCurrency(slotProps.data.price) }}
+                                            {{ formatCurrency(slotProps) }}
                                         </template>
                                     </Column>
                                     <Column field="category" header="Category" sortable style="min-width: 10rem"></Column>
@@ -110,7 +113,7 @@
 
                             <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Product Details" :modal="true">
                                 <div class="flex flex-col gap-6">
-                                    <img v-if="transaction.image" :src="`https://primefaces.org/cdn/primevue/images/product/${transaction.image}`" :alt="transaction.image" class="block m-auto pb-4" />
+                                    <img v-if="transaction.image" :src="`https://primefaces.org/cdn/primevue/images/transaction/${transaction.image}`" :alt="transaction.image" class="block m-auto pb-4" />
                                     <div>
                                         <label for="name" class="block font-bold mb-3">Name</label>
                                         <InputText id="name" v-model.trim="transaction.name" required="true" autofocus :invalid="submitted && !transaction.name" fluid />
@@ -236,7 +239,7 @@ const productDialog = ref(false);
 const deleteProductDialog = ref(false);
 const deleteProductsDialog = ref(false);
 const transaction = ref({});
-const selectedProducts = ref();
+const selectedTransactions = ref();
 const filters = ref({
     'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
 });
@@ -264,24 +267,23 @@ const hideDialog = () => {
 const saveProduct = () => {
     submitted.value = true;
 
-    // if (product?.value.name?.trim()) {
-    //     if (product.value.id) {
-    //         product.value.inventoryStatus = product.value.inventoryStatus.value ? product.value.inventoryStatus.value : product.value.inventoryStatus;
-    //         products.value[findIndexById(product.value.id)] = product.value;
-    //         toast.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
-    //     }
-    //     else {
-    //         product.value.id = createId();
-    //         product.value.code = createId();
-    //         product.value.image = 'product-placeholder.svg';
-    //         product.value.inventoryStatus = product.value.inventoryStatus ? product.value.inventoryStatus.value : 'INSTOCK';
-    //         products.value.push(product.value);
-    //         toast.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
-    //     }
-    //
-    //     productDialog.value = false;
-    //     product.value = {};
-    // }
+    if (transaction?.value.transaction_date?.trim()) {
+        if (transaction.value.id) {
+            transaction.value.status.name = transaction.value.status.name.value ? transaction.value.status.name.value : transaction.value.status.name;
+            transactions.value[findIndexById(transaction.value.id)] = transaction.value;
+            toast.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
+        }
+        else {
+            transaction.value.id = createId();
+            transaction.value.image = 'transaction-placeholder.svg';
+            transaction.value.status.name = transaction.value.status.name ? transaction.value.status.name.value : 'Confirmed';
+            transactions.value.push(transaction.value);
+            toast.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
+        }
+
+        productDialog.value = false;
+        transaction.value = {};
+    }
 };
 const editProduct = (prod) => {
     transaction.value = {...prod};
@@ -292,10 +294,10 @@ const confirmDeleteProduct = (prod) => {
     deleteProductDialog.value = true;
 };
 const deleteProduct = () => {
-    // products.value = products.value.filter(val => val.id !== product.value.id);
-    // deleteProductDialog.value = false;
-    // product.value = {};
-    // toast.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
+    transactions.value = transactions.value.filter(val => val.id !== transaction.value.id);
+    deleteProductDialog.value = false;
+    transaction.value = {};
+    toast.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
 };
 const findIndexById = (id) => {
     let index = -1;
@@ -323,9 +325,9 @@ const confirmDeleteSelected = () => {
     deleteProductsDialog.value = true;
 };
 const deleteSelectedProducts = () => {
-    transactions.value = transactions.value.filter(val => !selectedProducts.value.includes(val));
+    transactions.value = transactions.value.filter(val => !selectedTransactions.value.includes(val));
     deleteProductsDialog.value = false;
-    selectedProducts.value = null;
+    selectedTransactions.value = null;
     toast.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
 };
 
