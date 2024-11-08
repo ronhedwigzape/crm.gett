@@ -11,7 +11,7 @@ class AdminController extends Controller
     public function dashboard()
     {
         return Inertia::render('Dashboard', [
-            'transactions' => Inertia::defer(fn () => Transaction::with(['client', 'service.serviceDetail', 'status'])->get()),
+            'transactions' => Inertia::defer(fn () => Transaction::with(['client', 'service', 'serviceDetail', 'status'])->get()),
         ]);
     }
 

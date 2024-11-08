@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('package_name');
             $table->string('destination');
             $table->decimal('amount', 10, 2);
-            $table->string('itinerary');
+            $table->longText('itinerary');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();

@@ -107,17 +107,16 @@
                                             {{ slotProps.data.client.first_name + ' ' + slotProps.data.client.last_name }}
                                         </template>
                                     </Column>
-                                    <Column header="Image">
-                                        <template #body="slotProps">
-                                            <img :src="`https://primefaces.org/cdn/primevue/images/transaction/${slotProps.data.image}`" :alt="slotProps.data.image" class="rounded" style="width: 64px" />
-                                        </template>
-                                    </Column>
                                     <Column field="price" header="Price" sortable style="min-width: 8rem">
                                         <template #body="slotProps">
-                                            {{ formatCurrency(slotProps) }}
+                                            {{ formatCurrency(slotProps.data.service_detail.amount) }}
                                         </template>
                                     </Column>
-                                    <Column field="category" header="Category" sortable style="min-width: 10rem"></Column>
+                                    <Column field="service" header="Service" sortable style="min-width: 10rem">
+                                        <template #body="slotProps">
+                                            {{ slotProps.data.service.name }}
+                                        </template>
+                                    </Column>
                                     <Column field="rating" header="Reviews" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
                                             <Rating :modelValue="slotProps.data.rating" :readonly="true" />
