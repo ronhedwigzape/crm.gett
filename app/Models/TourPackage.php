@@ -11,7 +11,7 @@ class TourPackage extends ServiceDetail
 
     protected $fillable = [
         'service_id', 'package_name', 'destination',
-        'amount', 'itinerary', 'start_date', 'end_date',
+        'fee', 'itinerary', 'start_date', 'end_date',
     ];
 
     public function client()

@@ -27,7 +27,7 @@ class TransportServiceFactory extends Factory
             'pickup_location'  => $this->faker->address,
             'dropoff_location' => $this->faker->address,
             'pickup_datetime'  => $pickupDateTime,
-            'fare_amount'      => $this->faker->randomFloat(2, 20, 500),
+            'fee'      => $this->faker->randomFloat(2, 20, 500),
         ];
     }
 }

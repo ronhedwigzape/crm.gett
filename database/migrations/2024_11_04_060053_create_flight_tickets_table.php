@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('departure_airport');
             $table->string('arrival_airport');
             $table->date('departure_date');
-            $table->decimal('amount', 10, 2);
+            $table->decimal('fee', 10, 2);
             $table->date('arrival_date');
             $table->string('seat_class');
             $table->timestamps();

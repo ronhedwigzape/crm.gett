@@ -24,7 +24,7 @@ class HotelBookingController extends Controller
             'check_in_date'  => 'required|date',
             'check_out_date' => 'required|date|after:check_in_date',
             'num_guests'     => 'required|integer|min:1',
-            'amount'         => 'required|numeric|min:0',
+            'fee'         => 'required|numeric|min:0',
         ]);
 
         $hotelBooking = HotelBooking::create($validated);
@@ -48,7 +48,7 @@ class HotelBookingController extends Controller
             'check_in_date'  => 'sometimes|required|date',
             'check_out_date' => 'sometimes|required|date|after:check_in_date',
             'num_guests'     => 'sometimes|required|integer|min:1',
-            'amount'         => 'sometimes|required|numeric|min:0',
+            'fee'         => 'sometimes|required|numeric|min:0',
         ]);
 
         $hotelBooking->update($validated);

@@ -27,7 +27,7 @@ class TourPackageFactory extends Factory
             'service_id'   => Service::where('name', 'Tour Package')->first()->id,
             'package_name' => $this->faker->sentence(3),
             'destination'  => $this->faker->city,
-            'amount'       => $this->faker->randomFloat(2, 500, 10000),
+            'fee'       => $this->faker->randomFloat(2, 500, 10000),
             'itinerary'    => $this->faker->paragraph(),
             'start_date'   => $this->faker->dateTimeBetween('+1 week', '+2 weeks'),
             'end_date'     => $this->faker->dateTimeBetween('+2 weeks', '+1 month'),

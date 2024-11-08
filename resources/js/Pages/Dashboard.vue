@@ -14,11 +14,13 @@
                             <div class="card">
                                 <Toolbar class="mb-6">
                                     <template #start>
+                                        <Toast/>
                                         <Button label="New" icon="pi pi-plus" class="mr-2" :disabled="!selectedTransactions || !selectedTransactions.length"/>
                                         <Button label="Delete" icon="pi pi-trash" severity="danger" outlined  :disabled="!selectedTransactions || !selectedTransactions.length" />
                                     </template>
 
                                     <template #end>
+                                        <Toast/>
                                         <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" customUpload chooseLabel="Import" class="mr-2" auto :chooseButtonProps="{ severity: 'secondary' }" :disabled="!selectedTransactions || !selectedTransactions.length"/>
                                         <Button label="Export" icon="pi pi-upload" severity="secondary" @click="exportCSV" :disabled="!selectedTransactions || !selectedTransactions.length"/>
                                     </template>
@@ -26,7 +28,7 @@
                                 <DataTable :value="new Array(15)">
                                     <template #header>
                                         <div class="flex flex-wrap gap-2 items-center justify-between">
-                                            <h4 class="m-0 ">Manage Transactions</h4>
+                                            <h3 class="m-0 text-lg font-black">Manage Transactions</h3>
                                             <IconField>
                                                 <InputIcon>
                                                     <i class="pi pi-search" />
@@ -35,26 +37,46 @@
                                             </IconField>
                                         </div>
                                     </template>
-                                    <Column field="id" header="#">
+
+                                    <Column selectionMode="multiple" style="width: 6rem" :exportable="false">
                                         <template #body>
                                             <Skeleton/>
                                         </template>
                                     </Column>
-                                    <Column field="client" header="Client">
+                                    <Column header="Transaction Date" sortable style="min-width: 12rem">
                                         <template #body>
                                             <Skeleton/>
                                         </template>
                                     </Column>
-                                    <Column field="service" header="Service">
+                                    <Column header="Client" sortable style="min-width: 12rem">
                                         <template #body>
                                             <Skeleton/>
                                         </template>
                                     </Column>
-                                    <Column field="quantity" header="Quantity">
+                                    <Column header="Price" sortable style="min-width: 12rem">
                                         <template #body>
                                             <Skeleton/>
                                         </template>
                                     </Column>
+                                    <Column header="Service" sortable style="min-width: 12rem">
+                                        <template #body>
+                                            <Skeleton/>
+                                        </template>
+                                    </Column>
+                                    <Column header="Status" sortable style="min-width: 12rem">
+                                        <template #body>
+                                            <Skeleton/>
+                                        </template>
+                                    </Column>
+                                    <Column header="Actions" :exportable="false" style="min-width: 12rem">
+                                        <template #body>
+                                            <div class="flex">
+                                                <Skeleton class="mx-2"/>
+                                                <Skeleton class="mx-2"/>
+                                            </div>
+                                        </template>
+                                    </Column>
+
                                 </DataTable>
                             </div>
                         </template>
@@ -63,11 +85,13 @@
                             <div class="card">
                                 <Toolbar class="mb-6">
                                     <template #start>
+                                        <Toast/>
                                         <Button label="New" icon="pi pi-plus" class="mr-2" @click="openNew"/>
                                         <Button label="Delete" icon="pi pi-trash" severity="danger" outlined @click="confirmDeleteSelected" :disabled="!selectedTransactions || !selectedTransactions.length" />
                                     </template>
 
                                     <template #end>
+                                        <Toast/>
                                         <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" customUpload chooseLabel="Import" class="mr-2" auto :chooseButtonProps="{ severity: 'secondary' }" />
                                         <Button label="Export" icon="pi pi-upload" severity="secondary" @click="exportCSV"/>
                                     </template>
@@ -81,7 +105,6 @@
                                     :paginator="true"
                                     :alwaysShowPaginator="true"
                                     :rows="10"
-                                    :lazy="true"
                                     :rowHover="true"
                                     :filters="filters"
                                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -101,39 +124,34 @@
                                     </template>
 
                                     <Column selectionMode="multiple" style="width: 6rem" :exportable="false"></Column>
-                                    <Column header="Client" sortable style="min-width: 12rem">
+                                    <Column field="transaction_date" header="Transaction Date" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
-                                            {{ slotProps.data.client.first_name + ' ' + slotProps.data.client.last_name }}
+                                            {{ slotProps.data.transaction_date }}
                                         </template>
                                     </Column>
-                                    <Column field="price" header="Price" sortable style="min-width: 12rem">
+                                    <Column field="client.last_name" header="Client" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
-                                            <span v-if="slotProps.data.service.service_type === 'flight_ticket' || slotProps.data.service.service_type === 'tour_package' || slotProps.data.service.service_type === 'hotel_booking'">
-                                                 {{ formatCurrency(slotProps.data.service_detail.amount) }}
-                                            </span>
-                                            <span v-else-if="slotProps.data.service.service_type === 'travel_insurance'">
-                                                 {{ formatCurrency(slotProps.data.service_detail.coverage_amount) }}
-                                            </span>
-                                            <span v-else-if="slotProps.data.service.service_type === 'tourist_visa'">
-                                                 {{ formatCurrency(slotProps.data.service_detail.visa_fee) }}
-                                            </span>
-                                            <span v-else-if="slotProps.data.service.service_type === 'transport_services'">
-                                                 {{ formatCurrency(slotProps.data.service_detail.fare_amount) }}
-                                            </span>
+                                            {{ slotProps.data.client.last_name + ', ' + slotProps.data.client.first_name }}
                                         </template>
                                     </Column>
-                                    <Column field="service" header="Service" sortable style="min-width: 12rem">
+                                    <Column field="service_detail.fee" header="Price" sortable style="min-width: 12rem">
+                                        <template #body="slotProps">
+                                            {{ formatCurrency(slotProps.data.service_detail.fee)}}
+                                        </template>
+                                    </Column>
+                                    <Column field="service.name" header="Service" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
                                             {{ slotProps.data.service.name }}
                                         </template>
                                     </Column>
-                                    <Column field="inventoryStatus" header="Status" sortable style="min-width: 12rem">
+                                    <Column field="status.name" header="Status" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
                                             <Tag :value="slotProps.data.status.name" :severity="getStatusLabel(slotProps.data.status.name)" />
                                         </template>
                                     </Column>
                                     <Column header="Actions" :exportable="false" style="min-width: 12rem">
                                         <template #body="slotProps">
+                                            <Toast/>
                                             <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
                                             <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
                                         </template>
@@ -141,21 +159,20 @@
                                 </DataTable>
                             </div>
 
-                            <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Product Details" :modal="true">
+                            <Dialog v-model:visible="transactionDialog" :style="{ width: '450px' }" header="Transaction Detail" :modal="true">
                                 <div class="flex flex-col gap-6">
-                                    <img v-if="transaction.image" :src="`https://primefaces.org/cdn/primevue/images/transaction/${transaction.image}`" :alt="transaction.image" class="block m-auto pb-4" />
                                     <div>
-                                        <label for="name" class="block font-bold mb-3">Name</label>
-                                        <InputText id="name" v-model.trim="transaction.name" required="true" autofocus :invalid="submitted && !transaction.name" fluid />
-                                        <small v-if="submitted && !transaction.name" class="text-red-500">Name is required.</small>
+                                        <label for="code" class="block font-bold mb-3">Name</label>
+                                        <InputText id="code" v-model.trim="transaction.code" required="true" autofocus :invalid="submitted && !transaction.code" fluid />
+                                        <small v-if="submitted && !transaction.code" class="text-red-500">Name is required.</small>
                                     </div>
                                     <div>
                                         <label for="description" class="block font-bold mb-3">Description</label>
                                         <Textarea id="description" v-model="transaction.description" required="true" rows="3" cols="20" fluid />
                                     </div>
                                     <div>
-                                        <label for="inventoryStatus" class="block font-bold mb-3">Inventory Status</label>
-                                        <Select id="inventoryStatus" v-model="transaction.inventoryStatus" :options="statuses" optionLabel="label" placeholder="Select a Status" fluid></Select>
+                                        <label for="status" class="block font-bold mb-3">Status</label>
+                                        <Select id="status" v-model="transaction.status.name" :options="statuses" optionLabel="label" placeholder="Select a Status" fluid></Select>
                                     </div>
 
                                     <div>
@@ -193,6 +210,7 @@
                                 </div>
 
                                 <template #footer>
+                                    <Toast/>
                                     <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
                                     <Button label="Save" icon="pi pi-check" @click="saveProduct" />
                                 </template>
@@ -201,12 +219,10 @@
                             <Dialog v-model:visible="deleteTransactionDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
                                 <div class="flex items-center gap-4">
                                     <i class="pi pi-exclamation-triangle !text-3xl" />
-                                    <span v-if="transaction"
-                                    >Are you sure you want to delete <b>{{ transaction.name }}</b
-                                    >?</span
-                                    >
+                                    <span v-if="transaction">Are you sure you want to delete <b>{{ transaction.name }}</b>?</span>
                                 </div>
                                 <template #footer>
+                                    <Toast/>
                                     <Button label="No" icon="pi pi-times" text @click="deleteTransactionDialog = false" />
                                     <Button label="Yes" icon="pi pi-check" @click="deleteProduct" />
                                 </template>
@@ -218,6 +234,7 @@
                                     <span v-if="transaction">Are you sure you want to delete the selected transactions?</span>
                                 </div>
                                 <template #footer>
+                                    <Toast/>
                                     <Button label="No" icon="pi pi-times" text @click="deleteTransactionsDialog = false" />
                                     <Button label="Yes" icon="pi pi-check" text @click="deleteSelectedProducts" />
                                 </template>
@@ -249,27 +266,16 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import Toolbar from 'primevue/toolbar';
 import FileUpload from 'primevue/fileupload';
-import Rating from 'primevue/rating';
 import Tag from 'primevue/tag';
 
 const props = defineProps({
     transactions: Array
 });
 
-watch(
-    () => props.transactions,
-    (newTransactions, oldTransactions) => {
-        transactions.value = newTransactions;
-    },
-    { deep: true }
-);
-
-
-
 const toast = useToast();
 const dt = ref();
 const transactions = ref();
-const productDialog = ref(false);
+const transactionDialog = ref(false);
 const deleteTransactionDialog = ref(false);
 const deleteTransactionsDialog = ref(false);
 const transaction = ref({});
@@ -284,6 +290,33 @@ const statuses = ref([
     {label: 'Cancelled', value: 'Cancelled'}
 ]);
 
+const getSortField = (service) => {
+    switch (service.service_type) {
+        case 'flight_ticket':
+        case 'tour_package':
+        case 'hotel_booking':
+            return 'service_detail.fee';
+        case 'travel_insurance':
+            return 'service_detail.fee';
+        case 'tourist_visa':
+            return 'service_detail.fee';
+        case 'transport_services':
+            return 'service_detail.fee';
+        default:
+            return null;
+    }
+};
+
+
+watch(
+    () => props.transactions,
+    (newTransactions, oldTransactions) => {
+        transactions.value = newTransactions;
+        console.log(newTransactions)
+    },
+    { deep: true }
+);
+
 watch(
     () => filters.value,
     (newFilters, oldFilters) => {
@@ -296,23 +329,25 @@ const handleClientName = (client) => {
 }
 
 const formatCurrency = (value) => {
-    if(value)
-        return value.toLocaleString('en-US', {style: 'currency', currency: 'PHP'});
-    return;
+    if (value !== undefined && value !== null) {
+        return new Intl.NumberFormat("en-US", { style: "currency", currency: "PHP",}).format(value);
+    }
+    return 'Invalid value';
 };
+
 const openNew = () => {
     transaction.value = {};
     submitted.value = false;
-    productDialog.value = true;
+    transactionDialog.value = true;
 };
 const hideDialog = () => {
-    productDialog.value = false;
+    transactionDialog.value = false;
     submitted.value = false;
 };
 const saveProduct = () => {
     submitted.value = true;
 
-    if (transaction?.value.transaction_date?.trim()) {
+    if (transaction?.value.code?.trim()) {
         if (transaction.value.id) {
             transaction.value.status.name = transaction.value.status.name.value ? transaction.value.status.name.value : transaction.value.status.name;
             transactions.value[findIndexById(transaction.value.id)] = transaction.value;
@@ -326,13 +361,13 @@ const saveProduct = () => {
             toast.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
         }
 
-        productDialog.value = false;
+        transactionDialog.value = false;
         transaction.value = {};
     }
 };
 const editProduct = (prod) => {
     transaction.value = {...prod};
-    productDialog.value = true;
+    transactionDialog.value = true;
 };
 const confirmDeleteProduct = (prod) => {
     transaction.value = prod;

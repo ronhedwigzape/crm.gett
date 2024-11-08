@@ -15,7 +15,7 @@ class TouristVisa extends ServiceDetail
         'country',
         'issue_date',
         'expiry_date',
-        'visa_fee'
+        'fee'
     ];
 
     public function service()

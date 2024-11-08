@@ -28,7 +28,7 @@ class TravelInsuranceFactory extends Factory
             'policy_number'      => $this->faker->unique()->numerify('INS-######'),
             'start_date'         => $startDate,
             'end_date'           => $endDate,
-            'coverage_amount'    => $this->faker->randomFloat(2, 1000, 10000),
+            'fee'    => $this->faker->randomFloat(2, 1000, 10000),
         ];
     }
 }

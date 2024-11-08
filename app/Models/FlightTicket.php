@@ -12,7 +12,7 @@ class FlightTicket extends ServiceDetail
     protected $fillable = [
         'service_id', 'airline_id', 'flight_number',
         'departure_airport', 'arrival_airport', 'departure_date',
-        'amount', 'arrival_date', 'seat_class',
+        'fee', 'arrival_date', 'seat_class',
     ];
 
     public function airline()

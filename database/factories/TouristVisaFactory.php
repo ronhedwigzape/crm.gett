@@ -26,7 +26,7 @@ class TouristVisaFactory extends Factory
             'country'     => $this->faker->country,
             'issue_date'  => $issueDate,
             'expiry_date' => $expiryDate,
-            'visa_fee'    => $this->faker->randomFloat(2, 50, 200),
+            'fee'    => $this->faker->randomFloat(2, 50, 200),
         ];
     }
 }

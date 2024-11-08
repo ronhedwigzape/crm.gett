@@ -23,7 +23,7 @@ class TouristVisaController extends Controller
             'country'     => 'required|string',
             'issue_date'  => 'required|date',
             'expiry_date' => 'required|date|after:issue_date',
-            'visa_fee'    => 'required|numeric|min:0',
+            'fee'    => 'required|numeric|min:0',
         ]);
 
         $touristVisa = TouristVisa::create($validated);
@@ -46,7 +46,7 @@ class TouristVisaController extends Controller
             'country'     => 'sometimes|required|string',
             'issue_date'  => 'sometimes|required|date',
             'expiry_date' => 'sometimes|required|date|after:issue_date',
-            'visa_fee'    => 'sometimes|required|numeric|min:0',
+            'fee'    => 'sometimes|required|numeric|min:0',
         ]);
 
         $touristVisa->update($validated);

@@ -29,7 +29,7 @@ class HotelBookingFactory extends Factory
             'check_in_date'  => $checkInDate,
             'check_out_date' => $checkOutDate,
             'num_guests'     => $this->faker->numberBetween(1, 4),
-            'amount'         => $this->faker->randomFloat(2, 100, 1000),
+            'fee'         => $this->faker->randomFloat(2, 100, 1000),
         ];
     }
 }

@@ -16,7 +16,7 @@ class HotelBooking extends ServiceDetail
         'check_in_date',
         'check_out_date',
         'num_guests',
-        'amount',
+        'fee',
     ];
 
     public function service()

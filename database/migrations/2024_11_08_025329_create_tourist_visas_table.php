@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('country');
             $table->date('issue_date');
             $table->date('expiry_date');
-            $table->decimal('visa_fee', 10, 2);
+            $table->decimal('fee', 10, 2);
             $table->timestamps();
         });
     }

@@ -30,7 +30,7 @@ class FlightTicketController extends Controller
             'departure_airport' => 'required|string|max:255',
             'arrival_airport'   => 'required|string|max:255',
             'departure_date'    => 'required|date',
-            'amount'            => 'required|numeric',
+            'fee'            => 'required|numeric',
             'arrival_date'      => 'required|date|after_or_equal:departure_date',
             'seat_class'        => 'required|string|max:50',
         ]);
@@ -62,7 +62,7 @@ class FlightTicketController extends Controller
             'departure_airport' => 'required|string|max:255',
             'arrival_airport'   => 'required|string|max:255',
             'departure_date'    => 'required|date',
-            'amount'            => 'required|numeric',
+            'fee'            => 'required|numeric',
             'arrival_date'      => 'required|date|after_or_equal:departure_date',
             'seat_class'        => 'required|string|max:50',
         ]);

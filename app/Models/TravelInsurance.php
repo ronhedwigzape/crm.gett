@@ -15,7 +15,7 @@ class TravelInsurance extends ServiceDetail
         'policy_number',
         'start_date',
         'end_date',
-        'coverage_amount'
+        'fee'
     ];
 
     public function service()

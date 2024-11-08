@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('policy_number');
             $table->date('start_date');
             $table->date('end_date');
-            $table->decimal('coverage_amount', 10, 2);
+            $table->decimal('fee', 10, 2);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('pickup_location');
             $table->string('dropoff_location');
             $table->dateTime('pickup_datetime');
-            $table->decimal('fare_amount', 10, 2);
+            $table->decimal('fee', 10, 2);
             $table->timestamps();
         });
     }

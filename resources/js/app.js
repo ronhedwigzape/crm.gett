@@ -19,6 +19,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(ToastService)
             .use(PrimeVue, {
                 theme: {
                     preset: Aura,
@@ -28,7 +29,6 @@ createInertiaApp({
                     }
                 }
             })
-            .use(ToastService)
             .use(autoAnimatePlugin)
             .use(ZiggyVue)
             .mount(el);

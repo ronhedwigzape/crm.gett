@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->integer('num_guests');
-            $table->decimal('amount', 10, 2);
+            $table->decimal('fee', 10, 2);
             $table->timestamps();
         });
     }

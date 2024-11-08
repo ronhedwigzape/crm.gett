@@ -24,7 +24,7 @@ class TransportServiceController extends Controller
             'pickup_location'  => 'required|string',
             'dropoff_location' => 'required|string',
             'pickup_datetime'  => 'required|date',
-            'fare_amount'      => 'required|numeric|min:0',
+            'fee'      => 'required|numeric|min:0',
         ]);
 
         $transportService = TransportService::create($validated);
@@ -47,7 +47,7 @@ class TransportServiceController extends Controller
             'pickup_location'  => 'sometimes|required|string',
             'dropoff_location' => 'sometimes|required|string',
             'pickup_datetime'  => 'sometimes|required|date',
-            'fare_amount'      => 'sometimes|required|numeric|min:0',
+            'fee'      => 'sometimes|required|numeric|min:0',
         ]);
 
         $transportService->update($validated);

@@ -23,7 +23,7 @@ class TravelInsuranceController extends Controller
             'policy_number'      => 'required|string|unique:travel_insurances,policy_number',
             'start_date'         => 'required|date',
             'end_date'           => 'required|date|after:start_date',
-            'coverage_amount'    => 'required|numeric|min:0',
+            'fee'    => 'required|numeric|min:0',
         ]);
 
         $travelInsurance = TravelInsurance::create($validated);
@@ -46,7 +46,7 @@ class TravelInsuranceController extends Controller
             'policy_number'      => 'sometimes|required|string|unique:travel_insurances,policy_number,' . $travelInsurance->id,
             'start_date'         => 'sometimes|required|date',
             'end_date'           => 'sometimes|required|date|after:start_date',
-            'coverage_amount'    => 'sometimes|required|numeric|min:0',
+            'fee'    => 'sometimes|required|numeric|min:0',
         ]);
 
         $travelInsurance->update($validated);

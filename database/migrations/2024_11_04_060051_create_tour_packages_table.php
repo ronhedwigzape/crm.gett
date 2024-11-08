@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->string('package_name');
             $table->string('destination');
-            $table->decimal('amount', 10, 2);
+            $table->decimal('fee', 10, 2);
             $table->longText('itinerary');
             $table->date('start_date');
             $table->date('end_date');

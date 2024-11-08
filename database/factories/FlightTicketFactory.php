@@ -34,7 +34,7 @@ class FlightTicketFactory extends Factory
             'departure_airport' => $this->faker->city,
             'arrival_airport'   => $this->faker->city,
             'departure_date'    => $departureDate,
-            'amount'            => $this->faker->randomFloat(2, 100, 10000),
+            'fee'            => $this->faker->randomFloat(2, 100, 10000),
             'arrival_date'      => $arrivalDate,
             'seat_class'        => $this->faker->randomElement(['Economy', 'Business', 'First Class']),
         ];

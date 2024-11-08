@@ -15,7 +15,7 @@ class TransportService extends ServiceDetail
         'pickup_location',
         'dropoff_location',
         'pickup_datetime',
-        'fare_amount'
+        'fee'
     ];
 
     public function service()
