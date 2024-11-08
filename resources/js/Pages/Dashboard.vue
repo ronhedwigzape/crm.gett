@@ -35,7 +35,7 @@
                                             </IconField>
                                         </div>
                                     </template>
-                                    <Column field="code" header="#">
+                                    <Column field="id" header="#">
                                         <template #body>
                                             <Skeleton/>
                                         </template>
@@ -90,7 +90,7 @@
                                 >
                                     <template #header>
                                         <div class="flex flex-wrap gap-2 items-center justify-between">
-                                            <h4 class="m-0 ">Manage Transactions</h4>
+                                            <h3 class="m-0 text-lg font-black">Manage Transactions</h3>
                                             <IconField>
                                                 <InputIcon>
                                                     <i class="pi pi-search" />
@@ -100,26 +100,31 @@
                                         </div>
                                     </template>
 
-                                    <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-                                    <Column field="code" header="#" sortable style="min-width: 12rem"></Column>
-                                    <Column header="Client" sortable style="min-width: 16rem">
+                                    <Column selectionMode="multiple" style="width: 6rem" :exportable="false"></Column>
+                                    <Column header="Client" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
                                             {{ slotProps.data.client.first_name + ' ' + slotProps.data.client.last_name }}
                                         </template>
                                     </Column>
-                                    <Column field="price" header="Price" sortable style="min-width: 8rem">
+                                    <Column field="price" header="Price" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
-                                            {{ formatCurrency(slotProps.data.service_detail.amount) }}
+                                            <span v-if="slotProps.data.service.service_type === 'flight_ticket' || slotProps.data.service.service_type === 'tour_package' || slotProps.data.service.service_type === 'hotel_booking'">
+                                                 {{ formatCurrency(slotProps.data.service_detail.amount) }}
+                                            </span>
+                                            <span v-else-if="slotProps.data.service.service_type === 'travel_insurance'">
+                                                 {{ formatCurrency(slotProps.data.service_detail.coverage_amount) }}
+                                            </span>
+                                            <span v-else-if="slotProps.data.service.service_type === 'tourist_visa'">
+                                                 {{ formatCurrency(slotProps.data.service_detail.visa_fee) }}
+                                            </span>
+                                            <span v-else-if="slotProps.data.service.service_type === 'transport_services'">
+                                                 {{ formatCurrency(slotProps.data.service_detail.fare_amount) }}
+                                            </span>
                                         </template>
                                     </Column>
-                                    <Column field="service" header="Service" sortable style="min-width: 10rem">
+                                    <Column field="service" header="Service" sortable style="min-width: 12rem">
                                         <template #body="slotProps">
                                             {{ slotProps.data.service.name }}
-                                        </template>
-                                    </Column>
-                                    <Column field="rating" header="Reviews" sortable style="min-width: 12rem">
-                                        <template #body="slotProps">
-                                            <Rating :modelValue="slotProps.data.rating" :readonly="true" />
                                         </template>
                                     </Column>
                                     <Column field="inventoryStatus" header="Status" sortable style="min-width: 12rem">
@@ -127,7 +132,7 @@
                                             <Tag :value="slotProps.data.status.name" :severity="getStatusLabel(slotProps.data.status.name)" />
                                         </template>
                                     </Column>
-                                    <Column :exportable="false" style="min-width: 12rem">
+                                    <Column header="Actions" :exportable="false" style="min-width: 12rem">
                                         <template #body="slotProps">
                                             <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
                                             <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
