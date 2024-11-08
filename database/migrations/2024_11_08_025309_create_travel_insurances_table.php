@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('travel_insurances', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->date('transaction_date');
-            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
-            $table->morphs('service_detail');
+            $table->string('insurance_provider');
+            $table->string('policy_number');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->decimal('coverage_amount', 10, 2);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('travel_insurances');
     }
 };

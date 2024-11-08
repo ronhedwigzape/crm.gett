@@ -11,18 +11,13 @@ class Service extends Model
 
     protected $fillable = ['name', 'description'];
 
-    public function flightTickets()
-    {
-        return $this->hasMany(FlightTicket::class);
-    }
-
-    public function tourPackages()
-    {
-        return $this->hasMany(TourPackage::class);
-    }
-
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function serviceDetail()
+    {
+        return $this->morphTo();
     }
 }

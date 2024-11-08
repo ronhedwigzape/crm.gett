@@ -29,7 +29,6 @@ class FlightTicketFactory extends Factory
 
         return [
             'service_id'        => Service::where('name', 'Flight Ticket')->first()->id,
-            'client_id'         => Client::factory()->create()->id,
             'airline_id'        => Airline::inRandomOrder()->first()->id,
             'flight_number'     => strtoupper($this->faker->bothify('??###')),
             'departure_airport' => $this->faker->city,

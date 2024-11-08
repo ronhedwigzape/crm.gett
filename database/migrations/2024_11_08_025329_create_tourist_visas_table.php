@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('tourist_visas', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->date('transaction_date');
-            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
-            $table->morphs('service_detail');
+            $table->string('visa_type');
+            $table->string('country');
+            $table->date('issue_date');
+            $table->date('expiry_date');
+            $table->decimal('visa_fee', 10, 2);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('tourist_visas');
     }
 };

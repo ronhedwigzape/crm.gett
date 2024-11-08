@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('hotel_bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->date('transaction_date');
-            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
-            $table->morphs('service_detail');
+            $table->string('hotel_name');
+            $table->string('location');
+            $table->date('check_in_date');
+            $table->date('check_out_date');
+            $table->integer('num_guests');
+            $table->decimal('amount', 10, 2);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('hotel_bookings');
     }
 };

@@ -32,4 +32,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function serviceDetail()
+    {
+        return $this->morphTo();
+    }
 }
