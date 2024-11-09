@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Link :href="'/'">
+    <Link :prefetch="['mount', 'click']" cache-for="1m" :href="'/'">
         <svg
             class="w-16 h-16"
             viewBox="0 0 48 48"

@@ -30,5 +30,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/home', [AdminController::class, 'home'])->name('home');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/client-master-list', [AdminController::class, 'clientMasterList'])->name('client-master-list');
+    Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
 });
