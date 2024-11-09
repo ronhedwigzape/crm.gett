@@ -45,7 +45,7 @@ const logout = () => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link prefetch :href="route('home')">
                                     <ApplicationMark class="block h-16 w-auto" />
                                 </Link>
                             </div>
@@ -55,10 +55,34 @@ const logout = () => {
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
                                 <NavLink
+                                    :href="route('home')"
+                                    :active="route().current('home')"
+                                >
+                                    Home
+                                </NavLink>
+                                <NavLink
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
                                     Dashboard
+                                </NavLink>
+                                <NavLink
+                                    :href="route('client-master-list')"
+                                    :active="route().current('client-master-list')"
+                                >
+                                    Client Master List
+                                </NavLink>
+                                <NavLink
+                                    :href="route('reports')"
+                                    :active="route().current('reports')"
+                                >
+                                    Reports
+                                </NavLink>
+                                <NavLink
+                                    :href="route('settings')"
+                                    :active="route().current('settings')"
+                                >
+                                    Settings
                                 </NavLink>
                             </div>
                         </div>
@@ -344,10 +368,34 @@ const logout = () => {
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
+                            :href="route('home')"
+                            :active="route().current('home')"
+                        >
+                            Home
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('client-master-list')"
+                            :active="route().current('client-master-list')"
+                        >
+                            Client Master List
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('reports')"
+                            :active="route().current('reports')"
+                        >
+                            Reports
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('settings')"
+                            :active="route().current('settings')"
+                        >
+                            Settings
                         </ResponsiveNavLink>
                     </div>
 

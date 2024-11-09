@@ -160,6 +160,7 @@ const clearPhotoFileInput = () => {
                         Your email address is unverified.
 
                         <Link
+                            :prefetch="['mount', 'click']"
                             :href="route('verification.send')"
                             method="post"
                             as="button"

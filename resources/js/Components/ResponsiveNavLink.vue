@@ -21,7 +21,7 @@ const classes = computed(() => {
             <slot />
         </button>
 
-        <Link v-else :href="href" :class="classes">
+        <Link :prefetch="['mount', 'click']" cache-for="1m" v-else :href="href" :class="classes">
             <slot />
         </Link>
     </div>

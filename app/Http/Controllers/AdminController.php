@@ -8,6 +8,11 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
+    public function home()
+    {
+        return Inertia::render('Home');
+    }
+
     public function dashboard()
     {
         return Inertia::render('Dashboard', [
@@ -15,8 +20,18 @@ class AdminController extends Controller
         ]);
     }
 
-    public function clients()
+    public function clientMasterList()
     {
-        return Inertia::render('Clients');
+        return Inertia::render('ClientMasterList');
+    }
+
+    public function reports()
+    {
+        return Inertia::render('Reports');
+    }
+
+    public function settings()
+    {
+        return Inertia::render('Settings');
     }
 }

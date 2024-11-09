@@ -6,12 +6,65 @@
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="overflow-hidden">
                     <Deferred data="transactions">
                         <template #fallback>
-                            <div class="card">
+                            <div class="flex justify-between gap-4 my-4 mx-1">
+                                <Card>
+                                    <template #title><Skeleton width="8rem" height="2rem"/></template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            <Skeleton width="8rem" height="2rem"/>
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title><Skeleton width="8rem" height="2rem"/></template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            <Skeleton width="8rem" height="2rem"/>
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title><Skeleton width="8rem" height="2rem"/></template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            <Skeleton width="8rem" height="2rem"/>
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title><Skeleton width="8rem" height="2rem"/></template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            <Skeleton width="8rem" height="2rem"/>
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title><Skeleton width="8rem" height="2rem"/></template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            <Skeleton width="8rem" height="2rem"/>
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title><Skeleton width="8rem" height="2rem"/></template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            <Skeleton width="8rem" height="2rem"/>
+                                        </p>
+                                    </template>
+                                </Card>
+                            </div>
+                            <div>
+                                <GettChart/>
+                            </div>
+                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <Toolbar class="mb-6">
                                     <template #start>
                                         <Toast/>
@@ -40,39 +93,39 @@
 
                                     <Column selectionMode="multiple" style="width: 6rem" :exportable="false">
                                         <template #body>
-                                            <Skeleton/>
+                                            <Skeleton height="1.5rem"/>
                                         </template>
                                     </Column>
                                     <Column header="Transaction Date" sortable style="min-width: 12rem">
                                         <template #body>
-                                            <Skeleton/>
+                                            <Skeleton height="2rem"/>
                                         </template>
                                     </Column>
                                     <Column header="Client" sortable style="min-width: 12rem">
                                         <template #body>
-                                            <Skeleton/>
+                                            <Skeleton height="2rem"/>
                                         </template>
                                     </Column>
                                     <Column header="Price" sortable style="min-width: 12rem">
                                         <template #body>
-                                            <Skeleton/>
+                                            <Skeleton height="2rem"/>
                                         </template>
                                     </Column>
                                     <Column header="Service" sortable style="min-width: 12rem">
                                         <template #body>
-                                            <Skeleton/>
+                                            <Skeleton height="2rem"/>
                                         </template>
                                     </Column>
                                     <Column header="Status" sortable style="min-width: 12rem">
                                         <template #body>
-                                            <Skeleton/>
+                                            <Skeleton height="2rem"/>
                                         </template>
                                     </Column>
                                     <Column header="Actions" :exportable="false" style="min-width: 12rem">
                                         <template #body>
                                             <div class="flex">
-                                                <Skeleton class="mx-2"/>
-                                                <Skeleton class="mx-2"/>
+                                                <Skeleton height="2rem" class="mx-2"/>
+                                                <Skeleton height="2rem" class="mx-2"/>
                                             </div>
                                         </template>
                                     </Column>
@@ -82,7 +135,60 @@
                         </template>
 
                         <div>
-                            <div class="card">
+                            <div class="flex justify-between gap-4 my-4 mx-1">
+                                <Card>
+                                    <template #title>{{ transactions.length }}</template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            Total Lead Count
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title>{{ transactions.length }}</template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            Active Leads
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title>{{ transactions.length }}</template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            Converted Leads
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title>{{ transactions.length }}</template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            Unassigned Leads
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title>{{ transactions.length }}</template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            Untouched Leads
+                                        </p>
+                                    </template>
+                                </Card>
+                                <Card>
+                                    <template #title>{{ transactions.length }}</template>
+                                    <template #content>
+                                        <p class="m-0">
+                                            For Follow Up
+                                        </p>
+                                    </template>
+                                </Card>
+                            </div>
+                            <div>
+                                <GettChart/>
+                            </div>
+                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <Toolbar class="mb-6">
                                     <template #start>
                                         <Toast/>
@@ -267,6 +373,8 @@ import InputIcon from 'primevue/inputicon';
 import Toolbar from 'primevue/toolbar';
 import FileUpload from 'primevue/fileupload';
 import Tag from 'primevue/tag';
+import Card from 'primevue/card';
+import GettChart from "@/Components/GettChart.vue";
 
 const props = defineProps({
     transactions: Array
