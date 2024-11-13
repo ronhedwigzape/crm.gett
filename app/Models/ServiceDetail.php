@@ -15,11 +15,6 @@ abstract class ServiceDetail extends Model
         return $this->belongsTo(Service::class);
     }
 
-    public function airline()
-    {
-        return $this->hasOneThrough(Airline::class, FlightTicket::class, 'id', 'id', 'service_detail_id', 'airline_id')
-            ->whereHasMorph('serviceDetail', FlightTicket::class);
-    }
 
 }
 

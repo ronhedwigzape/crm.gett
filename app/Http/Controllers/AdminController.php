@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FlightTicket;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,9 +17,19 @@ class AdminController extends Controller
     public function dashboard()
     {
         return Inertia::render('Dashboard', [
-            'transactions' => Inertia::defer(fn () => Transaction::with(['client', 'service', 'serviceDetail', 'status'])->get()),
+            'transactions' => Inertia::defer(fn () => Transaction::with([
+                'client',
+                'service',
+                'serviceDetail' => function ($morphTo) {
+                    $morphTo->morphWith([
+                        FlightTicket::class => ['airline'],
+                    ]);
+                },
+                'status',
+            ])->get()),
         ]);
     }
+
 
     public function clientMasterList()
     {
