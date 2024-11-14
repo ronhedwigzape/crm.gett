@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->date('transaction_date');
             $table->decimal('total_amount', 10, 2);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');

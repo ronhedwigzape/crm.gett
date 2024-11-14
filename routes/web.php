@@ -32,7 +32,9 @@ Route::middleware([
 ])->group(function () {
     Route::get('/home', [AdminController::class, 'home'])->name('home');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/client-master-list', [AdminController::class, 'clientMasterList'])->name('client-master-list');
+    Route::get('/clients', [AdminController::class, 'clients'])->name('clients');
+    Route::get('/services', [AdminController::class, 'services'])->name('services');
+    Route::get('/transactions', [AdminController::class, 'transactions'])->name('transactions');
     Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
 });

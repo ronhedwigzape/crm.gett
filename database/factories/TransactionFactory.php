@@ -43,6 +43,7 @@ class TransactionFactory extends Factory
             'service_detail_type' => get_class($serviceDetail),
             'service_detail_id' => $serviceDetail->id,
             'total_amount' => $this->faker->randomFloat(2, 100, 5000),
+            'user_id' => User::factory()->create()->id,
         ];
     }
 

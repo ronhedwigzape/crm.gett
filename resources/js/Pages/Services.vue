@@ -1,8 +1,8 @@
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Services">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
+                Services
             </h2>
         </template>
         <div class="py-3">

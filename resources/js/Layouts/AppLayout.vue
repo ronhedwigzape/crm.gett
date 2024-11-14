@@ -67,10 +67,22 @@ const logout = () => {
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    :href="route('client-master-list')"
-                                    :active="route().current('client-master-list')"
+                                    :href="route('clients')"
+                                    :active="route().current('clients')"
                                 >
-                                    Client Master List
+                                    Clients
+                                </NavLink>
+                                <NavLink
+                                    :href="route('services')"
+                                    :active="route().current('services')"
+                                >
+                                    Services
+                                </NavLink>
+                                <NavLink
+                                    :href="route('transactions')"
+                                    :active="route().current('transactions')"
+                                >
+                                    Transactions
                                 </NavLink>
                                 <NavLink
                                     :href="route('reports')"
@@ -380,10 +392,22 @@ const logout = () => {
                             Dashboard
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            :href="route('client-master-list')"
-                            :active="route().current('client-master-list')"
+                            :href="route('clients')"
+                            :active="route().current('clients')"
                         >
-                            Client Master List
+                            Clients
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('services')"
+                            :active="route().current('services')"
+                        >
+                            Services
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('transactions')"
+                            :active="route().current('transactions')"
+                        >
+                            Transactions
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
                             :href="route('reports')"
