@@ -70,4 +70,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Client::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'generated_by');
+    }
+
 }

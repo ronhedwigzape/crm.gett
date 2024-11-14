@@ -10,7 +10,13 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'client_id', 'service_id', 'status_id', 'transaction_date',
+        'code',
+        'client_id',
+        'service_id',
+        'status_id',
+        'transaction_date',
+        'user_id',
+        'total_amount',
     ];
 
     public function client()
@@ -36,5 +42,10 @@ class Transaction extends Model
     public function serviceDetail()
     {
         return $this->morphTo();
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
     }
 }

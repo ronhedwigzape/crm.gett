@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
             HotelBookingsTableSeeder::class,
             TouristVisasTableSeeder::class,
             TravelInsurancesTableSeeder::class,
-            TransportServicesTableSeeder::class
+            TransportServicesTableSeeder::class,
+            ReportTableSeeder::class,
         ]);
     }
 }

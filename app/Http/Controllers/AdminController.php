@@ -30,7 +30,6 @@ class AdminController extends Controller
         ]);
     }
 
-
     public function clientMasterList()
     {
         return Inertia::render('ClientMasterList');

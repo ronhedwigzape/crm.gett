@@ -31,21 +31,18 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         $service = Service::inRandomOrder()->first();
-
-        // Create or get a client
         $client = Client::inRandomOrder()->first() ?? Client::factory()->create();
-
-        // Create the associated service detail based on service_type
         $serviceDetail = $this->createServiceDetail($service, $client);
 
         return [
-            'code'                 => $this->faker->uuid(),
-            'client_id'            => $client->id,
-            'service_id'           => $service->id,
-            'status_id'            => Status::inRandomOrder()->first()->id,
-            'transaction_date'     => $this->faker->dateTimeBetween('-1 month', 'now'),
-            'service_detail_type'  => get_class($serviceDetail),
-            'service_detail_id'    => $serviceDetail->id,
+            'code' => $this->faker->uuid(),
+            'client_id' => $client->id,
+            'service_id' => $service->id,
+            'status_id' => Status::inRandomOrder()->first()->id,
+            'transaction_date' => $this->faker->dateTimeBetween('-1 month', 'now'),
+            'service_detail_type' => get_class($serviceDetail),
+            'service_detail_id' => $serviceDetail->id,
+            'total_amount' => $this->faker->randomFloat(2, 100, 5000),
         ];
     }
 
