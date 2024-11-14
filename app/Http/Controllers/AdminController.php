@@ -84,15 +84,15 @@ class AdminController extends Controller
 
         return Inertia::render('Dashboard', [
             'kpis' => [
-                'totalSales' => $totalSales,
-                'transactionCount' => $transactionCount,
-                'newClients' => $newClients,
-                'topServices' => $topServices,
+                'total_sales' => Inertia::defer(fn() => $totalSales),
+                'transaction_count' => Inertia::defer(fn() => $transactionCount),
+                'new_clients' => Inertia::defer(fn() => $newClients),
+                'top_services' => Inertia::defer(fn() => $topServices),
             ],
-            'salesOverview' => $salesOverview,
-            'recentTransactions' => $recentTransactions,
-            'upcomingBookings' => $upcomingBookings,
-            'pendingTransactions' => $pendingTransactions,
+            'sales_overview' => Inertia::defer(fn() => $salesOverview),
+            'recent_transactions' => Inertia::defer(fn() => $recentTransactions),
+            'upcoming_bookings' => Inertia::defer(fn() => $upcomingBookings),
+            'pending_transactions' => Inertia::defer(fn() =>$pendingTransactions),
         ]);
     }
 
@@ -133,7 +133,7 @@ class AdminController extends Controller
             ->get();
 
         return Inertia::render('Services', [
-            'serviceCategories' => $serviceCategories,
+            'service_categories' => $serviceCategories,
         ]);
     }
 
