@@ -9,7 +9,13 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = [
+        'name',
+        'service_type',
+        'description',
+        'service_detail_type',
+        'service_detail_id',
+    ];
 
     public function transactions()
     {

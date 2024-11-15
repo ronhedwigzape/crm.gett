@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Service;
+use App\Models\TouristVisa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,13 +21,24 @@ class TouristVisaFactory extends Factory
         $issueDate = $this->faker->dateTimeBetween('-1 year', 'now');
         $expiryDate = (clone $issueDate)->modify('+' . rand(1, 5) . ' years');
 
+        // Attempt to find the 'Tourist Visa' service, or create it if it doesn't exist
+        $service = Service::firstOrCreate(
+            ['name' => 'Tourist Visa'],
+            [
+                'service_type' => 'tourist_visa',
+                'description' => 'Description for Tourist Visa',
+                'service_detail_type' => TouristVisa::class,
+                'service_detail_id' => 0, // Placeholder, will be updated after creation
+            ]
+        );
+
         return [
-            'service_id'  => Service::where('service_type', 'tourist_visa')->first()->id,
-            'visa_type'   => $this->faker->randomElement(['Single Entry', 'Multiple Entry']),
-            'country'     => $this->faker->country,
-            'issue_date'  => $issueDate,
+            'service_id' => $service->id,
+            'visa_type' => $this->faker->randomElement(['Single Entry', 'Multiple Entry']),
+            'country' => $this->faker->country,
+            'issue_date' => $issueDate,
             'expiry_date' => $expiryDate,
-            'fee'    => $this->faker->randomFloat(2, 50, 200),
+            'fee' => $this->faker->randomFloat(2, 50, 200),
         ];
     }
 }

@@ -23,16 +23,16 @@ class DatabaseSeeder extends Seeder
             BranchesTableSeeder::class,
             UsersTableSeeder::class,
             ClientsTableSeeder::class,
-            ServicesTableSeeder::class,
             StatusTableSeeder::class,
             AirlinesTableSeeder::class,
+            ServicesTableSeeder::class,
             TourPackagesTableSeeder::class,
-            TransactionsTableSeeder::class,
             FlightTicketsTableSeeder::class,
             HotelBookingsTableSeeder::class,
             TouristVisasTableSeeder::class,
             TravelInsurancesTableSeeder::class,
             TransportServicesTableSeeder::class,
+            TransactionsTableSeeder::class,
             ReportTableSeeder::class,
         ]);
     }

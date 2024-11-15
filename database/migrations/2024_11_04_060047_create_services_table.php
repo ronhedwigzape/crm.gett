@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('service_type');
             $table->text('description')->nullable();
+            $table->string('service_detail_type');
+            $table->unsignedBigInteger('service_detail_id');
             $table->timestamps();
         });
     }

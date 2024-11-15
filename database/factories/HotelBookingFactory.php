@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class HotelBookingFactory extends Factory
 {
     protected $model = HotelBooking::class;
+
     /**
      * Define the model's default state.
      *
@@ -22,14 +23,25 @@ class HotelBookingFactory extends Factory
         $checkInDate = $this->faker->dateTimeBetween('+1 days', '+1 month');
         $checkOutDate = (clone $checkInDate)->modify('+' . rand(1, 7) . ' days');
 
+        // Attempt to find the 'Hotel Booking' service, or create it if it doesn't exist
+        $service = Service::firstOrCreate(
+            ['name' => 'Hotel Booking'],
+            [
+                'service_type' => 'hotel_booking',
+                'description' => 'Description for Hotel Booking',
+                'service_detail_type' => HotelBooking::class,
+                'service_detail_id' => 0, // Placeholder, will be updated after creation
+            ]
+        );
+
         return [
-            'service_id'     => Service::where('service_type', 'hotel_booking')->first()->id,
-            'hotel_name'     => $this->faker->company,
-            'location'       => $this->faker->city,
-            'check_in_date'  => $checkInDate,
+            'service_id' => $service->id,
+            'hotel_name' => $this->faker->company,
+            'location' => $this->faker->city,
+            'check_in_date' => $checkInDate,
             'check_out_date' => $checkOutDate,
-            'num_guests'     => $this->faker->numberBetween(1, 4),
-            'fee'         => $this->faker->randomFloat(2, 100, 1000),
+            'num_guests' => $this->faker->numberBetween(1, 4),
+            'fee' => $this->faker->randomFloat(2, 100, 1000),
         ];
     }
 }
